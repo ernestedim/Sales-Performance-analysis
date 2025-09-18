@@ -1,0 +1,70 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Sales Performance Analytics</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">Sneaker Sales Performance Analytics</h1>
+      <p class="lead">Enter the details for a new sneaker product to predict the unsold inventory.</p>
+
+      <form action="/predict" method="post" class="mt-4">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="sell_through_rate">Sell-through Rate (%)</label>
+            <input type="number" class="form-control" id="sell_through_rate" name="sell_through_rate" step="0.01" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="damage_rate">Damage Rate (%)</label>
+            <input type="number" class="form-control" id="damage_rate" name="damage_rate" step="0.01" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="edition">Edition</label>
+            <select class="form-control" id="edition" name="edition">
+              <option>Anniversary</option>
+              <option>Holiday</option>
+              <option>Limited</option>
+              <option>Special Release</option>
+              <option>Standard</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="quarter">Quarter</label>
+            <select class="form-control" id="quarter" name="quarter">
+              <option>Q1</option>
+              <option>Q2</option>
+              <option>Q3</option>
+              <option>Q4</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="price_bucket">Price Bucket</label>
+            <select class="form-control" id="price_bucket" name="price_bucket">
+              <option>High</option>
+              <option>Mid</option>
+              <option>Low</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict</button>
+      </form>
+
+      {% if prediction is not none %}
+      <div class="alert alert-success mt-4" role="alert">
+        <strong>Predicted Unsold Inventory:</strong> {{ prediction | round(0) }} units
+      </div>
+      {% endif %}
+
+    </div>
+  </body>
+</html>
